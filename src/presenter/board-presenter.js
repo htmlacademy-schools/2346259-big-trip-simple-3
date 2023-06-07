@@ -1,18 +1,20 @@
-import CreationForm from '../view/creation-form';
-import EditingForm from '../view/edit-form';
-import Sorting from '../view/sorting';
-import EventItem from '../view/event-item';
-import EventList from '../view/event-list';
-import {render} from '../render';
+import CreationForm from '../view/formCreator-view.js';
+import EditingForm from '../view/formEditor-view.js';
+import Sorting from '../view/sort-view.js';
+import EventItem from '../view/eventItem-view.js';
+import EventList from '../view/eventList-view.js';
+import {render} from '../render.js';
 
 export default class BoardPresenter {
   waypointListComponent = new EventList();
 
-  constructor({boardContainer}) {
+  constructor({boardContainer, tripPointsModel}) {
     this.boardContainer = boardContainer;
+    this.tripPointsModel = tripPointsModel;
   }
 
   init() {
+    this.tripPoints = [...this.tripPointsModel.getTripPoints()];
     render(new Sorting(), this.boardContainer);
     render(this.waypointListComponent, this.boardContainer);
     render(new CreationForm(), this.waypointListComponent.getElement());
