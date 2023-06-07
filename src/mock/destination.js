@@ -1,29 +1,35 @@
-import {descriptionPhrases, namesOfPlaces} from './data.js';
-import {getRandomId, getRandomArrayElement } from '../util.js';
-import {generatePictures} from './picture.js';
+import { getRandomId, getRandomItemFromItems, createIDgenerator } from '../util.js';
+import { descriptionPhrases, namesOfPlaces } from './data.js';
 
-const destinationsId = [];
 const destinations = [];
 
-const generateDestination = () => {
-  let pointId = getRandomId();
-  while (destinationsId.indexOf(pointId) >= 0) {
-    pointId = getRandomId();
+const generatePictures = () => {
+  const pictures = [];
+  for (let i = 0; i < 6; i++) {
+    const picture = {
+      src: `http://picsum.photos/248/152?r=${getRandomId()}`,
+      description: getRandomItemFromItems(descriptionPhrases)
+    };
+    pictures.push(picture);
   }
-  destinationsId.push(pointId);
-  const descriptionPicture = getRandomArrayElement(descriptionPhrases);
-  const name = getRandomArrayElement(namesOfPlaces);
-  const pictures = generatePictures();
-  const destination = {
-    pointId, descriptionPicture, name, pictures
-  };
-  destinations.push(destination);
-  return pointId;
+  return pictures;
 };
 
-const getDestinationById = (id) => destinations.find((item)=>item.id === id);
-const getCityDescriptionById = (id) => destinations.find((destination) => destination.id === id).description;
-const getCityPicById = (id) => destinations.find((destination) => destination.id === id).pictures.src;
+const generateDestinationId = createIDgenerator();
 
+const generateDestination = (n) => {
+  for (let i = 0; i < n; i++) {
+    const destination = {
+      id: generateDestinationId(),
+      description: getRandomItemFromItems(descriptionPhrases),
+      name: getRandomItemFromItems(namesOfPlaces),
+      pictures: generatePictures()
+    };
+    destinations.push(destination);
+  }
+};
 
-export {generateDestination, getDestinationById, getCityPicById, getCityDescriptionById,};
+const getDestinationByID = (id) => destinations.find((item)=>item.id === id);
+
+export {generateDestination, getDestinationByID, destinations};
+

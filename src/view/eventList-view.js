@@ -4,16 +4,19 @@ function createTripListTemplate() {
   return '<ul class="trip-events__list"></ul>';
 }
 
-export default class EventList{
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-    return this.element;
+export default class EventList {
+  #element = null;
+
+  get template() {
+    return createTripListTemplate();
   }
 
-  getTemplate() {
-    return createTripListTemplate();
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
+    }
+
+    return this.#element;
   }
 
   removeElement() {
