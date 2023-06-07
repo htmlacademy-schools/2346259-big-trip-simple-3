@@ -12,10 +12,12 @@ export default class BoardPresenter {
   #boardContainer = null;
   #waypointsModel = null;
   #noWaypointMessage = null;
+  #sorters = null;
 
-  constructor({boardContainer, waypointsModel}) {
+  constructor({boardContainer, waypointsModel, sorters}) {
     this.#boardContainer = boardContainer;
     this.#waypointsModel = waypointsModel;
+    this.#sorters = sorters;
   }
 
   init() {
@@ -25,7 +27,7 @@ export default class BoardPresenter {
       render(this.#noWaypointMessage, this.#boardContainer);
     } else {
       this.#waypointListComponent = new EventList();
-      render(new SortView(), this.#boardContainer);
+      render(new SortView(this.#sorters), this.#boardContainer);
       render(this.#waypointListComponent, this.#boardContainer);
       render(new FormCreator(waypoints[0]), this.#waypointListComponent.element);
 
