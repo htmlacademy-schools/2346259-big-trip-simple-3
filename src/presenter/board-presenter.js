@@ -8,11 +8,13 @@ import {render} from '../render.js';
 export default class BoardPresenter {
   waypointListComponent = new EventList();
 
-  constructor({boardContainer}) {
+  constructor({boardContainer, tripPointsModel}) {
     this.boardContainer = boardContainer;
+    this.tripPointsModel = tripPointsModel;
   }
 
   init() {
+    this.tripPoints = [...this.tripPointsModel.getTripPoints()];
     render(new Sorting(), this.boardContainer);
     render(this.waypointListComponent, this.boardContainer);
     render(new CreationForm(), this.waypointListComponent.getElement());
