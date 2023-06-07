@@ -1,11 +1,11 @@
-import { getRandomPoint} from '../mock/tripPoint.js';
+export default class ModelWaypoint {
+  #arrWaypoints = null;
 
-const POINT_NUMBER = 3;
+  constructor(arrWaypoints) {
+    this.#arrWaypoints = arrWaypoints;
+  }
 
-export default class TripPointModel {
-  #tripPoints = Array.from({length: POINT_NUMBER}, getRandomPoint);
-
-  getTripPoints() {
-    return this.#tripPoints;
+  get arrWaypoints() {
+    return this.#arrWaypoints;
   }
 }
