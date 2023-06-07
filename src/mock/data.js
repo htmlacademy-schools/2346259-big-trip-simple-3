@@ -167,15 +167,28 @@ const offersByType = [{
 
 const getOffersByType = (type) => offersByType.find((currentTypeOffers) => currentTypeOffers.type === type).offers;
 
-const descrText = [
+const descriptionText = [
   'Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.',
   'Aliquam erat volutpat.',
   'In rutrum ac purus sit amet tempus.',
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
 ];
 
-const cities = [
-  'Tokyo', 'Seoul', 'Shanghai', 'Paris', 'New York'
+const nameOfPlaces = [
+  'Madrid', 'Munich', 'Dortmund', 'Manchester', 'Home', 'Moscow'
 ];
 
-export {pointTypes, fromToDates, offersByType, getOffersByType, descrText, cities};
+const FilterType = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future'
+};
+
+const SortType = {
+  DAY: 'day',
+  EVENT: 'event',
+  TIME: 'time',
+  PRICE: 'price',
+  OFFERS: 'offers'
+};
+
+export {pointTypes, fromToDates, offersByType, getOffersByType, descriptionText, nameOfPlaces, FilterType, SortType};
