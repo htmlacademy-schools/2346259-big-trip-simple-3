@@ -1,36 +1,31 @@
 import {getRandomItemFromItems, getRandomPrice, createIDgenerator} from '../util.js';
-import {fromToDates, pointTypes} from './data.js';
-import {destinations, generateDestination } from './destination.js';
+import {fromToDates, pointTypes } from './data.js';
+import { destinations, generateDestinations } from './destination.js';
 import {getRandomOffersIdsByType} from './offersDefine.js';
 
-const pointsId = [];
+const myPoints = [];
 
-const generatePointId = createIDgenerator();
-const generatePoints = (n) => {
+const generateWaypointId = createIDgenerator();
+const generateWaypoints = (n) => {
   for (let i = 0; i < n; i++) {
     const dates = getRandomItemFromItems(fromToDates);
     const type = getRandomItemFromItems(pointTypes);
-    const point = {
+    const waypoint = {
       basePrice: getRandomPrice(),
       dateFrom: dates.dateFrom,
       dateTo: dates.dateTo,
       destination: getRandomItemFromItems(destinations).id,
-      id: generatePointId(),
+      id: generateWaypointId(),
       offersIDs: getRandomOffersIdsByType(type),
       type
     };
-    pointsId.push(point);
+    myPoints.push(waypoint);
   }
 };
 
-const mockInit = (numPoints, numDestinations) => {
-  generateDestination(numDestinations);
-  generatePoints(numPoints);
+const mockInit = (numWaypoints, numDestinations) => {
+  generateDestinations(numDestinations);
+  generateWaypoints(numWaypoints);
 };
 
-function getRandomPoint() {
-  return getRandomItemFromItems(pointsId);
-}
-
-export {mockInit, pointsId, getRandomPoint};
-
+export {mockInit, myPoints};

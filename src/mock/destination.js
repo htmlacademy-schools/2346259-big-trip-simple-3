@@ -1,5 +1,5 @@
-import { getRandomId, getRandomItemFromItems, createIDgenerator } from '../util.js';
-import { descriptionPhrases, namesOfPlaces } from './data.js';
+import {getRandomId, getRandomItemFromItems, createIDgenerator} from '../util.js';
+import {descrText, cities} from './data.js';
 
 const destinations = [];
 
@@ -8,7 +8,7 @@ const generatePictures = () => {
   for (let i = 0; i < 6; i++) {
     const picture = {
       src: `http://picsum.photos/248/152?r=${getRandomId()}`,
-      description: getRandomItemFromItems(descriptionPhrases)
+      description: getRandomItemFromItems(descrText)
     };
     pictures.push(picture);
   }
@@ -17,19 +17,19 @@ const generatePictures = () => {
 
 const generateDestinationId = createIDgenerator();
 
-const generateDestination = (n) => {
+const generateDestinations = (n) => {
   for (let i = 0; i < n; i++) {
     const destination = {
       id: generateDestinationId(),
-      description: getRandomItemFromItems(descriptionPhrases),
-      name: getRandomItemFromItems(namesOfPlaces),
+      description: getRandomItemFromItems(descrText),
+      name: getRandomItemFromItems(cities),
       pictures: generatePictures()
     };
     destinations.push(destination);
   }
 };
 
-const getDestinationByID = (id) => destinations.find((item)=>item.id === id);
 
-export {generateDestination, getDestinationByID, destinations};
+const getDestinationByID = (id) => destinations.find((item) => item.id === id);
 
+export {generateDestinations, destinations, getDestinationByID};

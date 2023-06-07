@@ -1,6 +1,50 @@
 const pointTypes = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
 
 
+const fromToDates = [
+  {
+    dateFrom: '2023-01-17T18:12:13.375Z',
+    dateTo: '2023-01-17T21:00:00.375Z'
+  },
+  {
+    dateFrom: '2023-01-21T12:00:17.375Z',
+    dateTo: '2023-01-21T15:30:17.375Z'
+  },
+  {
+    dateFrom: '2023-01-25T06:30:15.375Z',
+    dateTo: '2023-01-25T09:40:30.375Z'
+  },
+  {
+    dateFrom: '2023-05-17T18:12:13.375Z',
+    dateTo: '2023-05-17T21:00:00.375Z'
+  },
+  {
+    dateFrom: '2023-05-21T12:00:17.375Z',
+    dateTo: '2023-05-21T15:30:17.375Z'
+  },
+  {
+    dateFrom: '2023-05-25T06:30:15.375Z',
+    dateTo: '2023-05-25T09:40:30.375Z'
+  },
+  {
+    dateFrom: '2023-07-17T18:12:13.375Z',
+    dateTo: '2023-07-17T21:00:00.375Z'
+  },
+  {
+    dateFrom: '2023-07-21T12:00:17.375Z',
+    dateTo: '2023-07-21T15:30:17.375Z'
+  },
+  {
+    dateFrom: '2023-07-25T06:30:15.375Z',
+    dateTo: '2023-07-25T09:40:30.375Z'
+  },
+  {
+    dateFrom: '2023-07-30T17:15:15.375Z',
+    dateTo: '2023-07-30T18:15:18.375Z'
+  }
+];
+
+
 const taxiOffers = [{
   id: 1,
   title: 'Upgrade a business class',
@@ -83,7 +127,8 @@ const checkInOffers = [{
   price: 15
 }];
 
-const offersType = [{
+
+const offersByType = [{
   type: 'taxi',
   offers: taxiOffers
 },
@@ -120,80 +165,17 @@ const offersType = [{
   offers: restaurantOffers
 },];
 
-const getArrayFromType = (type) => {
-  switch (type) {
-    case 'taxi':
-      return taxiOffers;
-    case 'bus':
-      return busOffers;
-    case 'train':
-      return trainOffers;
-    case 'ship':
-      return shipOffers;
-    case 'drive':
-      return driveOffers;
-    case 'flight':
-      return flightOffers;
-    case 'check-in':
-      return checkInOffers;
-    case 'sightseeing':
-      return sightseeingOffers;
-    case 'restaurant':
-      return restaurantOffers;
-  }
-};
+const getOffersByType = (type) => offersByType.find((currentTypeOffers) => currentTypeOffers.type === type).offers;
 
-const descriptionPhrases = [
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Cras aliquet varius magna, non porta ligula feugiat eget.',
-  'Aliquam id orci ut lectus varius viverra.', 'Fusce tristique felis at fermentum pharetra.',
-  'Nullam nunc ex, convallis sed finibus eget.', 'Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.', 'Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.'
+const descrText = [
+  'Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.',
+  'Aliquam erat volutpat.',
+  'In rutrum ac purus sit amet tempus.',
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
 ];
 
-const namesOfPlaces = [
-  'Madrid', 'Munich', 'Dortmund', 'Manchester', 'Home', 'Moscow'
+const cities = [
+  'Tokyo', 'Seoul', 'Shanghai', 'Paris', 'New York'
 ];
 
-const fromToDates = [
-  {
-    dateFrom: '2019-07-11T11:22:13.375Z',
-    dateTo: '2019-07-11T11:40:13.375Z'
-  },
-  {
-    dateFrom: '2019-07-13T11:22:13.375Z',
-    dateTo: '2019-07-13T14:40:13.375Z'
-  },
-  {
-    dateFrom: '2019-07-10T11:22:13.375Z',
-    dateTo: '2019-07-10T11:40:13.375Z'
-  },
-  {
-    dateFrom: '2019-07-15T09:15:13.375Z',
-    dateTo: '2019-07-15T12:00:13.375Z'
-  },
-  {
-    dateFrom: '2019-08-01T17:00:13.375Z',
-    dateTo: '2019-08-01T18:00:13.375Z'
-  },
-  {
-    dateFrom: '2019-08-03T11:22:13.375Z',
-    dateTo: '2019-08-03T11:40:13.375Z'
-  },
-  {
-    dateFrom: '2019-08-05T07:30:13.375Z',
-    dateTo: '2019-08-05T09:00:13.375Z'
-  },
-  {
-    dateFrom: '2019-07-18T20:20:13.375Z',
-    dateTo: '2019-07-18T21:40:13.375Z'
-  },
-  {
-    dateFrom: '2019-07-21T01:28:13.375Z',
-    dateTo: '2019-07-21T07:40:13.375Z'
-  },
-  {
-    dateFrom: '2019-07-28T16:15:13.375Z',
-    dateTo: '2019-07-28T20:40:13.375Z'
-  }
-];
-
-export {pointTypes, offersType, getArrayFromType, descriptionPhrases, namesOfPlaces, fromToDates};
+export {pointTypes, fromToDates, offersByType, getOffersByType, descrText, cities};
