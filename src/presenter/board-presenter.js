@@ -1,13 +1,19 @@
-import Sorting from '../view/sorting.js';
-import WaypointList from '../view/waypoint-list.js';
-import NoWaypointMessage from '../view/no-waypoints.js';
+import Sorting from '../view/sorting-view.js';
+import WaypointList from '../view/waypoint-list-view.js';
+import NoWaypointMessage from '../view/no-waypoints-view.js';
 import {remove, render, RenderPosition} from '../framework/render.js';
-import WaypointPresenter from './waypoint-presenter.js';
+import WaypointPresenter from './waypoint-presenter';
 import {FilterType, SortType, UpdateType, UserAction} from '../data.js';
 import {sorts} from '../sort.js';
 import {filter} from '../utils.js';
 import NewWaypointPresenter from './new-waypoint-presenter.js';
-import LoadingView from '../view/loading.js';
+import LoadingView from '../view/loading-view.js';
+import UiBlocker from '../framework/ui-blocker/ui-blocker';
+
+const TimeLimit = {
+  LOWER_LIMIT: 350,
+  UPPER_LIMIT: 1000,
+};
 
 export default class BoardPresenter {
   #waypointListComponent = new WaypointList();
@@ -16,6 +22,10 @@ export default class BoardPresenter {
   #filterType = FilterType.EVERYTHING;
   #loadingComponent = new LoadingView();
   #isLoading = true;
+  #uiBlocker = new UiBlocker({
+    lowerLimit: TimeLimit.LOWER_LIMIT,
+    upperLimit: TimeLimit.UPPER_LIMIT
+  });
 
   #boardContainer = null;
   #waypointsModel = null;
@@ -134,18 +144,35 @@ export default class BoardPresenter {
     this.#renderBoard();
   };
 
-  #handleViewAction = (actionType, updateType, update) => {
+  #handleViewAction = async (actionType, updateType, update) => {
+    this.#uiBlocker.block();
     switch (actionType) {
-      case UserAction.UPDATE_WAYPOINT:
-        this.#waypointsModel.updateWaypoint(updateType, update);
-        break;
       case UserAction.ADD_WAYPOINT:
-        this.#waypointsModel.addWaypoint(updateType, update);
+        this.#newWaypointPresenter.setSaving();
+        try {
+          await this.#waypointsModel.addWaypoint(updateType, update);
+        } catch (err) {
+          this.#waypointPresenter.get(update.id).setAborting();
+        }
+        break;
+      case UserAction.UPDATE_WAYPOINT:
+        this.#waypointPresenter.get(update.id).setSaving();
+        try {
+          await this.#waypointsModel.updateWaypoint(updateType, update);
+        } catch (err) {
+          this.#waypointPresenter.get(update.id).setAborting();
+        }
         break;
       case UserAction.DELETE_WAYPOINT:
-        this.#waypointsModel.deleteWaypoint(updateType, update);
+        this.#waypointPresenter.get(update.id).setDeleting();
+        try {
+          await this.#waypointsModel.deleteWaypoint(updateType, update);
+        } catch (err) {
+          this.#waypointPresenter.get(update.id).setAborting();
+        }
         break;
     }
+    this.#uiBlocker.unblock();
   };
 
   #handleModelEvent = (updateType, data) => {
