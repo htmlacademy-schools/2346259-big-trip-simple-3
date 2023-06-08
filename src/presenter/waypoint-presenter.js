@@ -1,7 +1,8 @@
-import {render, replace, remove} from '../framework/render';
-import EditItem from '../view/eventItem-view.js';
+import {render, replace, remove} from '../framework/render.js';
+import WaypointView from '../view/eventItem-view.js';
 import EditForm from '../view/formEditor-view.js';
-import {isEsc} from '../util.js';
+import {isDatesEqual, isEsc} from '../util.js';
+import {UpdateType, UserAction} from '../mock/data.js';
 
 const Mode = {
   DEFAULT: 'DEFAULT',
@@ -35,7 +36,7 @@ export default class WaypointPresenter {
     const prevWaypointComponent = this.#waypointComponent;
     const prevEditFormComponent = this.#editFormComponent;
 
-    this.#waypointComponent = new EditItem({
+    this.#waypointComponent = new WaypointView({
       oneWaypoint: this.#waypoint,
       onClick: this.#handleEditClick,
       offers: this.#offers,
@@ -48,6 +49,7 @@ export default class WaypointPresenter {
       offers: this.#offers,
       destinations: this.#destinations,
       onRollUpButton: this.#handleButtonClick,
+      onDeleteClick: this.#handleDeleteClick
     });
 
     if (prevWaypointComponent === null || prevEditFormComponent === null) {
@@ -104,8 +106,13 @@ export default class WaypointPresenter {
     document.body.addEventListener('keydown', this.#ecsKeydown);
   };
 
-  #handleFormSubmit = (waypoint) => {
-    this.#handleDataChange(waypoint);
+  #handleFormSubmit = (update) => {
+    const isMinorUpdate = !isDatesEqual(this.#waypoint.dateFrom, update.dateFrom) || this.#waypoint.basePrice !== update.basePrice;
+    this.#handleDataChange(
+      UserAction.UPDATE_WAYPOINT,
+      isMinorUpdate ? UpdateType.MINOR : UpdateType.PATCH,
+      update,
+    );
     this.#replaceFormToPoint();
     document.body.removeEventListener('keydown', this.#ecsKeydown);
   };
@@ -115,4 +122,13 @@ export default class WaypointPresenter {
     this.#replaceFormToPoint();
     document.body.removeEventListener('keydown', this.#ecsKeydown);
   };
+
+  #handleDeleteClick = (waypoint) => {
+    this.#handleDataChange(
+      UserAction.DELETE_WAYPOINT,
+      UpdateType.MINOR,
+      waypoint,
+    );
+  };
+
 }
