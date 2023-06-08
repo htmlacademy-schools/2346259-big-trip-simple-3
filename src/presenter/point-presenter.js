@@ -1,7 +1,7 @@
 import {render, replace, remove} from '../framework/render';
 import EditItem from '../view/eventItem-view.js';
 import EditForm from '../view/formEditor-view.js';
-import {isEsc} from '../util';
+import {isEsc} from '../util.js';
 
 const Mode = {
   DEFAULT: 'DEFAULT',
