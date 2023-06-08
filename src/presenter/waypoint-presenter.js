@@ -1,6 +1,6 @@
 import {render, replace, remove} from '../framework/render.js';
-import WaypointView from '../view/waypoint.js';
-import EditForm from '../view/edit-form.js';
+import WaypointView from '../view/waypoint-view.js';
+import EditForm from '../view/edit-form-view.js';
 import {isDatesEqual, isEsc} from '../utils.js';
 import {UpdateType, UserAction} from '../data.js';
 
@@ -62,7 +62,8 @@ export default class WaypointPresenter {
     }
 
     if (this.#mode === Mode.EDITING) {
-      replace(this.#editFormComponent, prevEditFormComponent);
+      replace(this.#waypointComponent, prevEditFormComponent);
+      this.#mode = Mode.DEFAULT;
     }
 
     remove(prevEditFormComponent);
@@ -81,11 +82,47 @@ export default class WaypointPresenter {
     }
   }
 
+  setSaving() {
+    if (this.#mode === Mode.EDITING) {
+      this.#editFormComponent.updateElement({
+        isDisabled: true,
+        isSaving: true,
+      });
+    }
+  }
+
+  setDeleting() {
+    if (this.#mode === Mode.EDITING) {
+      this.#editFormComponent.updateElement({
+        isDisabled: true,
+        isDeleting: true,
+      });
+    }
+  }
+
+
   #replacePointToForm = () => {
     replace(this.#editFormComponent, this.#waypointComponent);
     this.#handleModeChange();
     this.#mode = Mode.EDITING;
   };
+
+  setAborting() {
+    if (this.#mode === Mode.DEFAULT) {
+      this.#waypointComponent.shake();
+      return;
+    }
+
+    const resetFormState = () => {
+      this.#editFormComponent.updateElement({
+        isDisabled: false,
+        isSaving: false,
+        isDeleting: false,
+      });
+    };
+
+    this.#editFormComponent.shake(resetFormState);
+  }
 
   #replaceFormToPoint = () => {
     replace(this.#waypointComponent, this.#editFormComponent);
@@ -113,7 +150,6 @@ export default class WaypointPresenter {
       isMinorUpdate ? UpdateType.MINOR : UpdateType.PATCH,
       update,
     );
-    this.#replaceFormToPoint();
     document.body.removeEventListener('keydown', this.#ecsKeydown);
   };
 

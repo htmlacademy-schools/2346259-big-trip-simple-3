@@ -5,14 +5,14 @@ import ModelDestinations from './model/model-destinations.js';
 import ModelFilters from './model/model-filter.js';
 import FilterPresenter from './presenter/filter-presenter.js';
 import {render} from './render.js';
-import NewWaypointButton from './view/new-waypoint-button.js';
+import NewWaypointButton from './view/new-waypoint-button-view.js';
 import WaypointsApiService from './waypoints-api-service';
 
 const siteHeaderElement = document.querySelector('.trip-controls__filters');
 const container = document.querySelector('.trip-events');
 const placeForButton = document.querySelector('.trip-main');
 
-const AUTHORIZATION = 'Basic ssssss7r65sss';
+const AUTHORIZATION = 'Basic Emil8057';
 const END_POINT = 'https://18.ecmascript.pages.academy/big-trip';
 
 const waypointsApiService = new WaypointsApiService(END_POINT, AUTHORIZATION);
