@@ -1,6 +1,6 @@
 import AbstractView from '../framework/view/abstract-view';
-import {SortType, SortTypeDescription} from '../mock/data.js';
-import {isSelectedOption} from '../mock/sort.js';
+import {SortType, SortTypeDescription} from '../data.js';
+import {isSelectedOption} from '../sort.js';
 
 function createSortItemTemplate(sortType, currentSortType) {
   return `
@@ -19,7 +19,7 @@ function createSortingTemplate(currentSortType) {
   );
 }
 
-export default class SortView extends AbstractView {
+export default class Sorting extends AbstractView {
   #currentSortType = null;
   #handleSortTypeChange = null;
 

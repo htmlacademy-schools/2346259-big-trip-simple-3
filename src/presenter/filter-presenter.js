@@ -1,5 +1,5 @@
-import {FilterType, FilterTypeDescriptions, UpdateType} from '../mock/data.js';
-import Filters from '../view/filters-view.js';
+import {FilterType, FilterTypeDescriptions, UpdateType} from '../data.js';
+import Filters from '../view/filters.js';
 import {render} from '../render.js';
 import {remove, replace} from '../framework/render.js';
 

@@ -1,8 +1,9 @@
 import {render, RenderPosition} from '../render.js';
-import {UpdateType, UserAction} from '../mock/data.js';
-import EditForm from '../view/formEditor-view.js';
+import {UpdateType, UserAction} from '../data.js';
+
+import EditForm from '../view/edit-form.js';
 import {remove} from '../framework/render.js';
-import {isEsc} from '../util.js';
+import {isEsc} from '../utils.js';
 import {nanoid} from 'nanoid';
 
 export default class NewWaypointPresenter {

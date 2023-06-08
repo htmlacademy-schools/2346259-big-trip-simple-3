@@ -4,7 +4,7 @@ function createWaypointListTemplate() {
   return '<ul class="trip-events__list"></ul>';
 }
 
-export default class EventList extends AbstractView {
+export default class WaypointList extends AbstractView {
   get template() {
     return createWaypointListTemplate();
   }

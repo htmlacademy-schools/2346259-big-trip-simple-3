@@ -1,23 +1,25 @@
 import BoardPresenter from './presenter/board-presenter.js';
-import ModelWaypoint from './model/model-waypoint';
-import {mockInit, myPoints} from './mock/tripPoint.js';
+import ModelWaypoint from './model/model-waypoint.js';
 import ModelOffers from './model/model-offers.js';
 import ModelDestinations from './model/model-destinations.js';
-import {offersByType} from './mock/data.js';
-import {destinations} from './mock/destination.js';
 import ModelFilters from './model/model-filter.js';
 import FilterPresenter from './presenter/filter-presenter.js';
 import {render} from './render.js';
 import NewWaypointButton from './view/new-waypoint-button.js';
+import WaypointsApiService from './waypoints-api-service';
 
 const siteHeaderElement = document.querySelector('.trip-controls__filters');
 const container = document.querySelector('.trip-events');
 const placeForButton = document.querySelector('.trip-main');
 
-mockInit(3, 10);
-const modelWaypoints = new ModelWaypoint(myPoints);
-const modelOffers = new ModelOffers(offersByType);
-const modelDestinations = new ModelDestinations(destinations);
+const AUTHORIZATION = 'Basic ssssss7r65sss';
+const END_POINT = 'https://18.ecmascript.pages.academy/big-trip';
+
+const waypointsApiService = new WaypointsApiService(END_POINT, AUTHORIZATION);
+
+const modelWaypoints = new ModelWaypoint({waypointsApiService});
+const modelOffers = new ModelOffers({waypointsApiService});
+const modelDestinations = new ModelDestinations({waypointsApiService});
 const modelFilter = new ModelFilters();
 
 const boardPresenter = new BoardPresenter({
@@ -48,7 +50,9 @@ function handleNewTaskButtonClick() {
   newWaypointButtonComponent.element.disabled = true;
 }
 
-render(newWaypointButtonComponent, placeForButton);
-
 filterPresenter.init();
 boardPresenter.init();
+modelWaypoints.init()
+  .finally(() => {
+    render(newWaypointButtonComponent, placeForButton);
+  });
