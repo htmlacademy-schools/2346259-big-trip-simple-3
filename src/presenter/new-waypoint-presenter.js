@@ -1,9 +1,9 @@
 import {render, RenderPosition} from '../render.js';
-import {UpdateType, UserAction} from '../data.js';
+import {UpdateType, UserAction} from '../utilsdata/const.js';
 
 import EditForm from '../view/edit-form-view.js';
 import {remove} from '../framework/render.js';
-import {isEsc} from '../utils.js';
+import {isEsc} from '../utilsdata/utils.js';
 
 
 export default class NewWaypointPresenter {

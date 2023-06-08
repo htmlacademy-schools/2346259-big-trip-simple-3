@@ -1,5 +1,5 @@
 import Observable from '../framework/observable';
-import {UpdateType} from '../data.js';
+import {UpdateType} from '../utilsdata/const.js';
 
 export default class ModelWaypoint extends Observable {
   #waypointsApiService = null;
