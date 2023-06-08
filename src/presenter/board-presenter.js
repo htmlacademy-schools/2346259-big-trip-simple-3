@@ -1,7 +1,7 @@
 import SortView from '../view/sort-view.js';
 import EventList from '../view/eventList-view.js';
 import NoPoint from '../view/noItems.js';
-import {render, RenderPosition} from '../framework/render';
+import {render, RenderPosition} from '../framework/render.js';
 import WaypointPresenter from './point-presenter.js';
 import {SortType} from '../mock/data.js';
 import {sorts} from '../mock/sort.js';
