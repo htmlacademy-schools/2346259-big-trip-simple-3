@@ -1,4 +1,4 @@
-import {getDateDayAndMo, getDateWithoutT, getDateWithT, getTime, getItemFromItemsById} from '../utils.js';
+import {getDateDayAndMo, getDateWithoutT, getDateWithT, getTime, getItemFromItemsById} from '../utilsdata/utils.js';
 import AbstractView from '../framework/view/abstract-view.js';
 import he from 'he';
 

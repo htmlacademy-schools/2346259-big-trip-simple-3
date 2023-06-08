@@ -1,8 +1,8 @@
-import {getDateYears, getItemFromItemsById, makeFirstLetterUpperCase} from '../utils.js';
+import {getDateYears, getItemFromItemsById, makeFirstLetterUpperCase} from '../utilsdata/utils.js';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.css';
 import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
-import {pointTypes} from '../data.js';
+import {pointTypes} from '../utilsdata/const.js';
 import he from 'he';
 
 const BLANK_WAYPOINT = {

@@ -1,8 +1,8 @@
 import {render, replace, remove} from '../framework/render.js';
 import WaypointView from '../view/waypoint-view.js';
 import EditForm from '../view/edit-form-view.js';
-import {isDatesEqual, isEsc} from '../utils.js';
-import {UpdateType, UserAction} from '../data.js';
+import {isDatesEqual, isEsc} from '../utilsdata/utils.js';
+import {UpdateType, UserAction} from '../utilsdata/const.js';
 
 const Mode = {
   DEFAULT: 'DEFAULT',
