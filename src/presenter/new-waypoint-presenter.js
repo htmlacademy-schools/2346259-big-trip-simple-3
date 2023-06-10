@@ -1,8 +1,6 @@
-import {render, RenderPosition} from '../render.js';
 import {UpdateType, UserAction} from '../utilsdata/const.js';
-
 import EditForm from '../view/edit-form-view.js';
-import {remove} from '../framework/render.js';
+import {remove, render, RenderPosition} from '../framework/render.js';
 import {isEsc} from '../utilsdata/utils.js';
 
 

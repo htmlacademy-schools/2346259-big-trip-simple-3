@@ -4,7 +4,7 @@ import ModelOffers from './model/model-offers.js';
 import ModelDestinations from './model/model-destinations.js';
 import ModelFilters from './model/model-filter.js';
 import FilterPresenter from './presenter/filter-presenter.js';
-import {render} from './render.js';
+import {render} from './framework/render.js';
 import NewWaypointButton from './view/new-waypoint-button-view.js';
 import WaypointsApiService from './api/waypoints-api-service.js';
 
