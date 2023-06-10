@@ -1,7 +1,6 @@
 import {FilterType, FilterTypeDescriptions, UpdateType} from '../utilsdata/const.js';
 import Filters from '../view/filters-view.js';
-import {render} from '../render.js';
-import {remove, replace} from '../framework/render.js';
+import {remove, replace, render} from '../framework/render.js';
 import {filter} from '../utilsdata/utils.js';
 
 
