@@ -60,6 +60,9 @@ function createEventTypeListTemplate(currentType, id) {
 }
 
 function createEditFormTemplate(isEditForm, oneWaypoint, offers, destinations) {
+  if (!oneWaypoint.destination) {
+    oneWaypoint.destination = destinations[0].id;
+  }
   const itemDest = getItemFromItemsById(destinations, oneWaypoint.destination);
   const curTypeOffers = offers.find((element) => element.type === oneWaypoint.type).offers;
   return (
@@ -293,6 +296,10 @@ export default class EditForm extends AbstractStatefulView {
   };
 
   #destinationHandler = (evt) => {
+    const newDest = this.#destinations.find((destination) => destination.name === evt.target.value);
+    if (!newDest) {
+      return;
+    }
     evt.preventDefault();
     this.updateElement({
       destination: this.#destinations.find((destination) => destination.name === evt.target.value).id,

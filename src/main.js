@@ -8,7 +8,7 @@ import {render} from './framework/render.js';
 import NewWaypointButton from './view/new-waypoint-button-view.js';
 import WaypointsApiService from './api/waypoints-api-service.js';
 
-const AUTHORIZATION = 'Basic Emil8057';
+const AUTHORIZATION = 'Basic Emil0985aa7';
 const END_POINT = 'https://18.ecmascript.pages.academy/big-trip';
 
 const siteHeaderElement = document.querySelector('.trip-controls__filters');
